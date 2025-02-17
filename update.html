@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Changelog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h2, h3 {
+            margin: 5px 0;
+        }
+        .progress-container {
+            position: relative;
+            width: 100%;
+            height: 25px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #4CAF50;
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>UPDATE CHANGELOG version 2.31</h2>
+    <h3 id="lol1">[+] error/bug fixed</h3>
+    <h3>[+] update ui form</h3>
+    <h3>[+] update 85% -> 99% unc script load</h3>
+    <h3>[+] new ui</h3>
+    <h3>[+] bypass byfron</h3>
+    <h3>[+] Output mode = {on}</h3>
+    <h3 id="progress-text">_{[+]}_ 0% -> 24.68%</h3>
+
+    <!-- Thanh tiến trình -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="progress-text" id="progress-label">0%</div>
+    </div>
+
+    <script>
+        // Hàm lấy phần trăm từ văn bản và cập nhật thanh tiến trình
+        function updateProgressBar() {
+            let progressText = document.getElementById("progress-text").innerText;
+            let matches = progressText.match(/(\d+(\.\d+)?)% -> (\d+(\.\d+)?)/); // Lấy giá trị phần trăm với thập phân
+
+            if (matches) {
+                let startPercent = parseFloat(matches[1]); 
+                let endPercent = parseFloat(matches[3]); // Lấy giá trị phần trăm với độ chính xác thập phân
+
+                let progressBar = document.getElementById("progress-bar");
+                let progressLabel = document.getElementById("progress-label");
+
+                // Đặt giá trị thanh tiến trình dựa trên phần trăm cuối
+                progressBar.style.width = endPercent + "%";
+                progressLabel.innerText = endPercent.toFixed(2) + "%"; // Hiển thị phần trăm với 2 chữ số thập phân
+            }
+        }
+
+        // Gọi hàm khi trang load
+        window.onload = updateProgressBar;
+    </script>
+
+</body>
+</html>
